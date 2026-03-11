@@ -8,7 +8,7 @@ water_level = 0.75
 
 
 # Detect if north/east are >= current
-# 	and sout/west and <= current
+#     and south/west and <= current
 def measure_cardinals():
     curr = measure()
     north = measure(North)
