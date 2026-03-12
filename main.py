@@ -13,7 +13,7 @@ import gold
 import till
 
 is_water = True
-water_level = 0.75
+water_level = 1
 is_fertilizer = True
 
 change_hat(Hats.Wizard_Hat)
@@ -33,4 +33,4 @@ movement_utils.reset_pos()
 # cactus.grow_cactus_all_num_grid(0, 0, 5, 5, 9)
 
 # mega_builds.double_maze_carrot_grass_pumpkin_sunflower_tree_32()
-mega_builds.polyculture_random_spawn_32()
+mega_builds.polyculture_random_spawn_32(water_level)
