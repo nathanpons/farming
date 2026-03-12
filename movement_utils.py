@@ -46,28 +46,51 @@ def nav_to_tile(nav_x, nav_y):
     # Find number of tiles moves needed to travel to a specific tile
     curr_x = get_pos_x()
 
+    # If x is the same, do nothing, otherwise find direction and move
     if nav_x != curr_x:
         diff_x = nav_x - curr_x
+        direct_dist = abs(diff_x)
+        wrapped_dist = get_world_size() - direct_dist
 
-        # Find direction of travel for x and y
-        if diff_x < 0:
-            x_dir = West
+        # Find direction of travel for x
+        if direct_dist <= wrapped_dist:
+            if diff_x < 0:
+                x_dir = West
+            else:
+                x_dir = East
+            steps = direct_dist
         else:
-            x_dir = East
+            if diff_x < 0:
+                x_dir = East
+            else:
+                x_dir = West
+            steps = wrapped_dist
 
         # Travel to tile
-        for _ in range(abs(diff_x)):
+        for _ in range(steps):
             move(x_dir)
 
     curr_y = get_pos_y()
 
+    # If y is the same, do nothing, otherwise find direction and move
     if nav_y != curr_y:
         diff_y = nav_y - curr_y
+        direct_dist = abs(diff_y)
+        wrapped_dist = get_world_size() - direct_dist
 
-        if diff_y < 0:
-            y_dir = South
+        # Find direction of travel for y
+        if direct_dist <= wrapped_dist:
+            if diff_y < 0:
+                y_dir = South
+            else:
+                y_dir = North
+            steps = direct_dist
         else:
-            y_dir = North
+            if diff_y < 0:
+                y_dir = North
+            else:
+                y_dir = South
+            steps = wrapped_dist
 
-        for _ in range(abs(diff_y)):
+        for _ in range(steps):
             move(y_dir)
