@@ -8,6 +8,8 @@ bush = Entities.Bush
 grass = Entities.Grass
 tree = Entities.Tree
 
+crop_list = [carrot, bush, grass, tree]
+
 
 # Test the general flow of how polyculture works if you just follow the companion chain
 def test_poly_drone(start_x=16, start_y=16, water_level=0.75):
@@ -21,9 +23,10 @@ def test_poly_drone(start_x=16, start_y=16, water_level=0.75):
             if get_ground_type() != soil:
                 till()
 
-            # Start with the carrot and add it to the planted coords so it can be harvested later
+            # Start with a random crop and add it to the planted coords so it can be harvested later
             watering.pour_water(water_level)
-            plant(carrot)
+            starting_crop = crop_list[random() * len(crop_list)]
+            plant(starting_crop)
             planted_coords.append((get_pos_x(), get_pos_y()))
 
             while True:
@@ -70,9 +73,10 @@ def test_poly(start_x=16, start_y=16, water_level=0.75):
         if get_ground_type() != soil:
             till()
 
-        # Start with the carrot and add it to the planted coords so it can be harvested later
+        # Start with a random crop and add it to the planted coords so it can be harvested later
         watering.pour_water(water_level)
-        plant(carrot)
+        starting_crop = crop_list[random() * len(crop_list)]
+        plant(starting_crop)
         planted_coords.append((get_pos_x(), get_pos_y()))
 
         while True:
