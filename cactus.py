@@ -141,7 +141,8 @@ def drone_grow_cactus(start_x=0, start_y=0, size_x=6, size_y=6, num=9):
                     if can_harvest():
                         harvest()
                         plant(crop)
-                    watering.pour_water(water_level)
+                    if get_entity_type() == None:
+                        break
                     curr = measure()
 
                 # Move North after every check except last
@@ -152,11 +153,41 @@ def drone_grow_cactus(start_x=0, start_y=0, size_x=6, size_y=6, num=9):
 
 
 def full_same_number_cactus(number=9):
-    # Spawn 31 drones that create columns of cacti with the same number
-    for x in range(31):
-        while True:
-            drone = spawn_drone(drone_grow_cactus(x, 0, 1, 32, number))
-            if drone:
-                break
 
-    grow_cactus_all_num_grid(31, 0, 1, 32, number)
+    while True:
+        # Spawn 31 drones that create columns of cacti with the same number
+        for x in range(31):
+            while True:
+                drone = spawn_drone(drone_grow_cactus(x, 0, 1, 32, number))
+                if drone:
+                    break
+
+        # Nav to bottom of each column in grid
+        movement_utils.nav_to_tile(31, 0)
+
+        for y in range(31):
+
+            # Set board
+            if get_ground_type() != soil:
+                till()
+            if get_entity_type() != crop:
+                harvest()
+                plant(crop)
+
+            # Remove all non-num
+            curr = measure()
+            while curr != number:
+                if can_harvest():
+                    harvest()
+                    plant(crop)
+                curr = measure()
+
+            # Move North after every check except last
+            if y < 31:
+                move(North)
+
+        # Harvest when all plants are the same number and grown
+        while True:
+            if can_harvest():
+                harvest()
+                break
