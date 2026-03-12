@@ -8,6 +8,7 @@ import pumpkins
 import sunflowers
 import cactus
 import gold
+import polyculture
 
 is_water = True
 water_level = 0.75
@@ -42,3 +43,19 @@ def double_maze_carrot_grass_pumpkin_sunflower_tree_32():
     )
     gold_drone = spawn_drone(gold.drone_farm_gold(21, 21, 21))
     # gold_drone2 = spawn_drone(gold.drone_farm_gold(16, 4, 10))
+
+
+def polyculture_random_spawn_32():
+    # Spawn 32 drones in random positions that grow plants in a polyculture pattern
+    for _ in range(31):
+        x = random() * get_world_size() // 1
+        y = random() * get_world_size() // 1
+        while True:
+            drone = spawn_drone(polyculture.test_poly_drone(x, y))
+            if drone:
+                break
+
+    x = random() * get_world_size() // 1
+    y = random() * get_world_size() // 1
+
+    polyculture.test_poly(x, y)
