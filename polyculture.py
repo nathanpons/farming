@@ -7,11 +7,10 @@ carrot = Entities.Carrot
 bush = Entities.Bush
 grass = Entities.Grass
 tree = Entities.Tree
-water_level = 0.75
 
 
 # Test the general flow of how polyculture works if you just follow the companion chain
-def test_poly_drone(start_x=16, start_y=16):
+def test_poly_drone(start_x=16, start_y=16, water_level=0.75):
 
     def tp():
         movement_utils.nav_to_tile(start_x, start_y)
@@ -23,7 +22,7 @@ def test_poly_drone(start_x=16, start_y=16):
                 till()
 
             # Start with the carrot and add it to the planted coords so it can be harvested later
-            watering.pour_water()
+            watering.pour_water(water_level)
             plant(carrot)
             planted_coords.append((get_pos_x(), get_pos_y()))
 
@@ -42,7 +41,7 @@ def test_poly_drone(start_x=16, start_y=16):
                 if entity_type != None:
                     break
 
-                watering.pour_water()
+                watering.pour_water(water_level)
                 plant(companion_plant_type)
                 planted_coords.append((get_pos_x(), get_pos_y()))
 
@@ -53,6 +52,7 @@ def test_poly_drone(start_x=16, start_y=16):
                     # break loop if for some reason there is nothing here? This is a bug
                     if get_entity_type() == None:
                         break
+                    watering.pour_water(water_level)
                     if can_harvest():
                         harvest()
                         break
@@ -60,7 +60,7 @@ def test_poly_drone(start_x=16, start_y=16):
     return tp
 
 
-def test_poly(start_x=16, start_y=16):
+def test_poly(start_x=16, start_y=16, water_level=0.75):
 
     movement_utils.nav_to_tile(start_x, start_y)
 
@@ -71,7 +71,7 @@ def test_poly(start_x=16, start_y=16):
             till()
 
         # Start with the carrot and add it to the planted coords so it can be harvested later
-        watering.pour_water()
+        watering.pour_water(water_level)
         plant(carrot)
         planted_coords.append((get_pos_x(), get_pos_y()))
 
@@ -90,7 +90,7 @@ def test_poly(start_x=16, start_y=16):
             if entity_type != None:
                 break
 
-            watering.pour_water()
+            watering.pour_water(water_level)
             plant(companion_plant_type)
             planted_coords.append((get_pos_x(), get_pos_y()))
 
@@ -101,6 +101,7 @@ def test_poly(start_x=16, start_y=16):
                 # break loop if for some reason there is nothing here? This is a bug
                 if get_entity_type() == None:
                     break
+                watering.pour_water(water_level)
                 if can_harvest():
                     harvest()
                     break
