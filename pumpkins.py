@@ -8,17 +8,17 @@ dead_pumpkin = Entities.Dead_Pumpkin
 water_level = 0.75
 
 # Can make an optimization by creating a list of all
-# 	dead pumpkin locations and looping through those
-# 	locations till the list is empty. This is faster
-# 	than just looping over the entire 2d array to
-# 	search for dead pumpkins
+#     dead pumpkin locations and looping through those
+#     locations till the list is empty. This is faster
+#     than just looping over the entire 2d array to
+#     search for dead pumpkins
 
 
 def grow_pumpkins(start_x=0, start_y=0, size_x=6, size_y=6):
 
     # Loop twice
-    # 	First loop to plant every tile with pumpkins
-    # 	Second loop to populate the dead_pumpkins list with coords
+    #     First loop to plant every tile with pumpkins
+    #     Second loop to populate the dead_pumpkins list with coords
     for _ in range(2):
         movement_utils.nav_to_tile(start_x, start_y)
         dead_pumpkins = []
@@ -74,8 +74,8 @@ def grow_pumpkins(start_x=0, start_y=0, size_x=6, size_y=6):
 def grow_infected_pumpkins(start_x=0, start_y=0, size_x=6, size_y=6):
 
     # Loop twice
-    # 	First loop to plant every tile with pumpkins
-    # 	Second loop to populate the dead_pumpkins list with coords
+    #     First loop to plant every tile with pumpkins
+    #     Second loop to populate the dead_pumpkins list with coords
     for _ in range(2):
         movement_utils.nav_to_tile(start_x, start_y)
         dead_pumpkins = []

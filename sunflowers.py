@@ -69,7 +69,7 @@ def grow_ten_sunflowers(start_x=0, start_y=0, is_column=True, is_fertilizer=Fals
             direction = East
 
         # Grow a column/row of 10 flowers with the
-        # 	bottom 9 being seven pedals
+        #     bottom 9 being seven pedals
         for i in range(10):
             if get_ground_type() != soil:
                 till()
@@ -91,7 +91,7 @@ def grow_ten_sunflowers(start_x=0, start_y=0, is_column=True, is_fertilizer=Fals
                 move(direction)
 
         # Loop on top flower to perma harvest with
-        # 	guarunteed highest/equal pedals
+        #     guarunteed highest/equal pedals
         while True:
             watering.pour_water()
             if is_fertilizer:
@@ -115,7 +115,7 @@ def plant_ten_sunflowers(start_x=0, start_y=0, is_column=True, is_fertilizer=Fal
         direction = East
 
     # Grow a column/row of 10 flowers with the
-    # 	bottom 9 being seven pedals
+    #     bottom 9 being seven pedals
     for i in range(10):
         if get_ground_type() != soil:
             till()
