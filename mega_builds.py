@@ -10,17 +10,6 @@ import cactus
 import gold
 import polyculture
 
-is_water = True
-water_level = 0.75
-is_fertilizer = True
-
-change_hat(Hats.Wizard_Hat)
-
-# clear()
-movement_utils.reset_pos()
-# movement_utils.clear_board()
-
-
 def double_maze_carrot_grass_pumpkin_sunflower_tree_32():
     # Drones
     carrot_wood_drone1 = spawn_drone(wood.drone_grow_trees_and_carrots(0, 11, 1, 21))
