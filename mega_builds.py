@@ -45,17 +45,17 @@ def double_maze_carrot_grass_pumpkin_sunflower_tree_32():
     # gold_drone2 = spawn_drone(gold.drone_farm_gold(16, 4, 10))
 
 
-def polyculture_random_spawn_32():
+def polyculture_random_spawn_32(water_level=0.75):
     # Spawn 32 drones in random positions that grow plants in a polyculture pattern
     for _ in range(31):
         x = random() * get_world_size() // 1
         y = random() * get_world_size() // 1
         while True:
-            drone = spawn_drone(polyculture.test_poly_drone(x, y))
+            drone = spawn_drone(polyculture.test_poly_drone(x, y, water_level))
             if drone:
                 break
 
     x = random() * get_world_size() // 1
     y = random() * get_world_size() // 1
 
-    polyculture.test_poly(x, y)
+    polyculture.test_poly(x, y, water_level)
