@@ -115,7 +115,10 @@ def drone_nav_maze_hug_right(prev_direction=North):
             open_paths = check_three_directions(direction[0])
             if len(open_paths) > 1:
                 for direction in open_paths:
-                    spawn_drone(drone_nav_maze_hug_right(direction))
+                    while True:
+                        drone = spawn_drone(drone_nav_maze_hug_right(direction))
+                        if drone:
+                            break
                 return
 
             # Navigate maze by moving either Right->Forward->Backward->Left
