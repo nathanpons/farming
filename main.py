@@ -5,10 +5,12 @@ import watering
 import grass
 import wood
 import carrots
+import polyculture
 import pumpkins
 import sunflowers
 import cactus
 import gold
+import till
 
 is_water = True
 water_level = 0.75
@@ -17,6 +19,7 @@ is_fertilizer = True
 change_hat(Hats.Wizard_Hat)
 
 # clear()
+till.drone_till_all()
 movement_utils.reset_pos()
 # movement_utils.clear_board()
 
@@ -29,4 +32,5 @@ movement_utils.reset_pos()
 # sunflowers.grow_sunflowers(is_water, is_fertilizer, water_level)
 # cactus.grow_cactus_all_num_grid(0, 0, 5, 5, 9)
 
-mega_builds.double_maze_carrot_grass_pumpkin_sunflower_tree_32()
+# mega_builds.double_maze_carrot_grass_pumpkin_sunflower_tree_32()
+mega_builds.polyculture_random_spawn_32()
