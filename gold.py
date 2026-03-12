@@ -128,8 +128,7 @@ def drone_nav_maze_hug_right(prev_direction=North):
                 pass
             elif move(left_of[direction[0]]):
                 direction[0] = left_of[direction[0]]
-            elif move(right_of[right_of[direction[0]]]):
-                direction[0] = right_of[right_of[direction[0]]]
+            elif can_move(right_of[right_of[direction[0]]]):
                 return
 
     return dnmhr
