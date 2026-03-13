@@ -18,9 +18,10 @@ is_fertilizer = True
 
 change_hat(Hats.Wizard_Hat)
 
+harvest()
 # clear()
-till.drone_till_all()
-movement_utils.reset_pos()
+# till.drone_till_all()
+# movement_utils.reset_pos()
 # movement_utils.clear_board()
 
 # grass.grow_hay()
@@ -30,7 +31,10 @@ movement_utils.reset_pos()
 # wood.grow_trees()
 # pumpkins.grow_pumpkins(10, 10)
 # sunflowers.grow_sunflowers(is_water, is_fertilizer, water_level)
-# cactus.grow_cactus_all_num_grid(0, 0, 5, 5, 9)
+# cactus.grow_cactus_all_num_grid(0, 0, 16, 16, 9)
 
 # mega_builds.double_maze_carrot_grass_pumpkin_sunflower_tree_32()
-mega_builds.polyculture_random_spawn_32(water_level)
+# mega_builds.polyculture_random_spawn_32(water_level)
+# cactus.full_same_number_cactus(9)
+
+gold.drone_solve_maze(16, 16, 32)
