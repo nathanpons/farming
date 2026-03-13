@@ -53,5 +53,5 @@ def polyculture_random_spawn_32(water_level=0.75):
 
 def maze_31x31_sunflower():
     spawn_drone(sunflowers.drone_plant_ten_sunflowers(0, 1, True, True))
-    spawn_drone(sunflowers.drone_sort_harvest_desc_sunflowers(0, 0, 32, 1))
+    spawn_drone(sunflowers.drone_sort_harvest_desc_sunflowers_dict(0, 0, 32, 1))
     gold.solve_maze_with_drones(16, 16, 31)
