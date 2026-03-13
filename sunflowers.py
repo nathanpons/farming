@@ -233,3 +233,47 @@ def drone_sort_harvest_desc_sunflowers(start_x=1, start_y=0, size_x=10, size_y=1
                         break
 
     return dfhls
+
+
+def drone_sort_harvest_desc_sunflowers_dict(start_x=1, start_y=0, size_x=10, size_y=1):
+
+    def dfhlsd():
+        change_hat(Hats.Sunflower_Hat)
+        while True:
+            petal_list = {
+                15: [],
+                14: [],
+                13: [],
+                12: [],
+                11: [],
+                10: [],
+                9: [],
+                8: [],
+                7: [],
+            }
+
+            # Plant and measure petals of all flowers in grid and store in petal_list
+            for x in range(size_x):
+                for y in range(size_y):
+                    movement_utils.nav_to_tile(x + start_x, y + start_y)
+                    if get_ground_type() != soil:
+                        till()
+                    if get_entity_type() != crop:
+                        harvest()
+                        plant(crop)
+                    watering.pour_water()
+                    num_petals = measure()
+                    petal_list[num_petals].append((get_pos_x(), get_pos_y()))
+
+            # Nav and harvest flowers in order of most petals to least petals
+            for petals in range(15, 6, -1):
+                if petal_list[petals]:
+                    for flower_coords in petal_list[petals]:
+                        movement_utils.nav_to_tile(flower_coords[0], flower_coords[1])
+
+                        while True:
+                            if can_harvest():
+                                harvest()
+                                break
+
+    return dfhlsd
