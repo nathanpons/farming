@@ -10,6 +10,7 @@ import cactus
 import gold
 import polyculture
 
+
 def double_maze_carrot_grass_pumpkin_sunflower_tree_32():
     # Drones
     carrot_wood_drone1 = spawn_drone(wood.drone_grow_trees_and_carrots(0, 11, 1, 21))
@@ -48,3 +49,9 @@ def polyculture_random_spawn_32(water_level=0.75):
     y = random() * get_world_size() // 1
 
     polyculture.test_poly(x, y, water_level)
+
+
+def maze_31x31_sunflower():
+    spawn_drone(sunflowers.drone_plant_ten_sunflowers(0, 1, True, True))
+    spawn_drone(sunflowers.drone_sort_harvest_desc_sunflowers(0, 0, 32, 1))
+    gold.solve_maze_with_drones(16, 16, 31)
