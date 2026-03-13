@@ -100,14 +100,14 @@ def drone_nav_maze_hug_right(prev_direction=North):
         # Loop till we find the gold
         while is_not_solved:
 
-            # Check if maze is solved
-            if get_entity_type() == Entities.Grass:
-                is_not_solved = False
-                return
-
             # Check tile for gold
             if get_entity_type() == gold:
                 harvest()
+                is_not_solved = False
+                return
+
+            # Check if maze is solved
+            if get_entity_type() != Entities.Hedge:
                 is_not_solved = False
                 return
 
@@ -148,7 +148,7 @@ def drone_farm_gold(start_x=0, start_y=21, grid_size=11):
     return dfg
 
 
-def drone_solve_maze(start_x=16, start_y=16, grid_size=32):
+def solve_maze_with_drones(start_x=16, start_y=16, grid_size=32):
 
     global is_not_solved
 
@@ -160,5 +160,5 @@ def drone_solve_maze(start_x=16, start_y=16, grid_size=32):
         open_paths = check_all_directions()
         for direction in open_paths:
             spawn_drone(drone_nav_maze_hug_right(direction))
-        while num_drones() > 1:
+        while get_entity_type() == Entities.Hedge:
             do_a_flip()
