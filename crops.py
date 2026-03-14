@@ -32,10 +32,7 @@ def drone_plant_grid(start_x=0, start_y=0, size_x=6, size_y=6, crop=Entities.Gra
 def plant_grid_drones(start_x=0, start_y=0, size_x=6, size_y=6, crop=Entities.Grass):
 
     for x in range(size_x):
-        for y in range(size_y):
-            while True:
-                drone = spawn_drone(
-                    drone_plant_grid(start_x + x, start_y, 1, size_y, crop)
-                )
-                if drone:
-                    break
+        while True:
+            drone = spawn_drone(drone_plant_grid(start_x + x, start_y, 1, size_y, crop))
+            if drone:
+                break
