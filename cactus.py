@@ -1,6 +1,7 @@
 from __builtins__ import *
 import movement_utils
 import watering
+import crops
 
 soil = Grounds.Soil
 crop = Entities.Cactus
@@ -191,3 +192,95 @@ def full_same_number_cactus(number=9):
             if can_harvest():
                 harvest()
                 break
+
+
+def bubble_sort_cactus_one_dimensional_on_spot_drone(
+    start_x=0, start_y=0, size=32, is_column=True
+):
+    def bscod():
+        opposite_direction = {North: South, South: North, East: West, West: East}
+
+        if is_column:
+            direction = North
+        else:
+            direction = East
+
+        for i in range(size):
+            swapped = False
+            for j in range(0, size - i - 1):
+
+                # Nav to tile
+                if is_column:
+                    movement_utils.nav_to_tile(start_x, start_y + j)
+                else:
+                    movement_utils.nav_to_tile(start_x + j, start_y)
+
+                # Set board
+                if get_ground_type() != soil:
+                    till()
+                if get_entity_type() != crop:
+                    harvest()
+                    plant(crop)
+
+                # Compare with next tile
+                curr = measure()
+                if is_column:
+                    movement_utils.nav_to_tile(start_x, start_y + j + 1)
+                else:
+                    movement_utils.nav_to_tile(start_x + j + 1, start_y)
+                next = measure()
+
+                # Swap if out of order
+                if curr > next:
+                    swapped = True
+                    swap(opposite_direction[direction])
+
+            # If no swaps happened, it must be sorted, break early
+            if not swapped:
+                break
+
+    return bscod
+
+
+def bubble_sort_cactus_grid(start_x=0, start_y=0, size_x=32, size_y=32, is_corrupt=False):
+
+    while True:
+        starting_num_drones = num_drones()
+
+        def wait_for_drones():
+            while num_drones() > starting_num_drones:
+                do_a_flip()
+
+        crops.plant_grid_drones(start_x, start_y, size_x, size_y, crop)
+
+        wait_for_drones()
+
+        # Sort columns
+        for x in range(size_x):
+            while True:
+                drone = spawn_drone(
+                    bubble_sort_cactus_one_dimensional_on_spot_drone(
+                        start_x + x, start_y, size_y, True
+                    )
+                )
+                if drone:
+                    break
+
+        wait_for_drones()
+
+        # Sort rows
+        for y in range(size_y):
+            while True:
+                drone = spawn_drone(
+                    bubble_sort_cactus_one_dimensional_on_spot_drone(
+                        start_x, start_y + y, size_x, False
+                    )
+                )
+                if drone:
+                    break
+
+        wait_for_drones()
+
+        if is_corrupt:
+            use_item(Items.Weird_Substance)
+        harvest()
